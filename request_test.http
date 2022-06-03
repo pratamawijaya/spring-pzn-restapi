@@ -18,7 +18,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "id": "AB001",
+  "id": "",
   "name": "Tahu Bacem",
   "price": 2000,
   "quantity": -10

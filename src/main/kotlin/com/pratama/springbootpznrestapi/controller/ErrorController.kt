@@ -12,11 +12,11 @@ class ErrorController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun validationHandler(): WebResponse<String> {
+    fun validationHandler(ex: MethodArgumentNotValidException): WebResponse<String> {
         return WebResponse(
             code = 400,
             status = "Bad Request",
-            data = "Bad Request"
+            data = ex.localizedMessage
         )
     }
 }
