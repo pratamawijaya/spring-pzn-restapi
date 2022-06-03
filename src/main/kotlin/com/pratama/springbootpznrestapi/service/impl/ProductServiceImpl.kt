@@ -42,12 +42,32 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
     }
 
     override fun get(id: String): ProductResponse {
-        val product = productRepository.findByIdOrNull(id)
-        if (product != null) {
-            return mapProductToProductResponse(product)
-        } else {
-            throw ProductNotFoundException()
+        val product = findProductByIdOrThrow(id)
+        return mapProductToProductResponse(product)
+    }
+
+
+    override fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse {
+        val product = findProductByIdOrThrow(id)
+        logger.info("update request : $updateProductRequest")
+
+        product.apply {
+            name = updateProductRequest.name ?: ""
+            price = updateProductRequest.price
+            quantity = updateProductRequest.quantity
+            updatedAt = Date()
         }
+        logger.info("product updated $product")
+        productRepository.save(product)
+
+
+        return mapProductToProductResponse(product)
+    }
+
+    override fun delete(id: String) {
+        val product = findProductByIdOrThrow(id)
+
+        productRepository.deleteById(id)
     }
 
     private fun mapProductToProductResponse(product: Product): ProductResponse {
@@ -61,24 +81,12 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
         )
     }
 
-    override fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse {
-
+    private fun findProductByIdOrThrow(id: String): Product {
         val product = productRepository.findByIdOrNull(id)
-        logger.info("update request : $updateProductRequest")
-
-        if (product != null) {
-            product.apply {
-                name = updateProductRequest.name ?: ""
-                price = updateProductRequest.price
-                quantity = updateProductRequest.quantity
-                updatedAt = Date()
-            }
-            logger.info("product updated $product")
-            productRepository.save(product)
-        } else {
+        if (product == null) {
             throw ProductNotFoundException()
+        } else {
+            return product
         }
-
-        return mapProductToProductResponse(product)
     }
 }

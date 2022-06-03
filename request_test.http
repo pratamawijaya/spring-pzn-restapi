@@ -10,7 +10,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "id": "AB002",
+  "id": "AB001",
   "name": "Tahu Sumedang",
   "price": 2000,
   "quantity": 10
@@ -62,3 +62,9 @@ Accept: application/json
   "price": 2000,
   "quantity": -10
 }
+###
+
+# Delete Product
+# Valid
+DELETE  http://localhost:8080/api/products/AB001
+Content-Type: application/json
