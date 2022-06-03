@@ -1,17 +1,24 @@
+# get all products
+GET http://localhost:8080/api/products
+Content-Type: application/json
+###
+
+## Post data
 ## Valid request
 POST http://localhost:8080/api/products
 Content-Type: application/json
 Accept: application/json
 
 {
-  "id": "AB001",
-  "name": "Tahu Bacem",
+  "id": "AB002",
+  "name": "Tahu Sumedang",
   "price": 2000,
   "quantity": 10
 }
 
 ###
 
+## Post data
 ## Invalid Request
  POST http://localhost:8080/api/products
 Content-Type: application/json
@@ -29,3 +36,15 @@ Accept: application/json
 ## Get Product By ID
 GET http://localhost:8080/api/products/AB001
 Content-Type: application/json
+
+###
+# Update data
+PUT http://localhost:8080/api/products/AB001
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Tahu Bacem Enak Sekali",
+  "price": 2000,
+  "quantity": 10
+}
