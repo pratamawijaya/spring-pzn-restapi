@@ -4,9 +4,7 @@ import com.pratama.springbootpznrestapi.model.ProductResponse
 import com.pratama.springbootpznrestapi.model.WebResponse
 import com.pratama.springbootpznrestapi.model.request.CreateProductRequest
 import com.pratama.springbootpznrestapi.service.ProductService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
@@ -23,6 +21,19 @@ class ProductController(val service: ProductService) {
             code = 200,
             status = "OK",
             data = response
+        )
+    }
+
+    @GetMapping(
+        value = ["/api/products/{id}"],
+        produces = ["application/json"]
+    )
+    fun getProduct(@PathVariable("id") id: String): WebResponse<ProductResponse> {
+        val productResponse = service.get(id)
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = productResponse
         )
     }
 }
