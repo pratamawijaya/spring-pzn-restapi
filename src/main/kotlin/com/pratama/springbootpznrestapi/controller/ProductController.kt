@@ -58,7 +58,7 @@ class ProductController(val service: ProductService) {
     )
     fun updateProduct(
         @PathVariable("id") id: String,
-        @RequestBody body: UpdateProductRequest
+        @Valid @RequestBody body: UpdateProductRequest
     ): WebResponse<ProductResponse> {
         val productResponse = service.update(id, body)
         return WebResponse(

@@ -1,5 +1,6 @@
 package com.pratama.springbootpznrestapi.model.request
 
+import java.util.*
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
@@ -10,8 +11,10 @@ data class UpdateProductRequest(
 
     @field:NotNull
     @field:Min(value = 1)
-    val price: Long?,
+    val price: Long,
 
+    @field:NotNull
     @field:Min(value = 0)
-    val quantity: Int?
-)
+    val quantity: Int,
+
+    )

@@ -30,10 +30,10 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
 
     override fun create(createProductRequest: CreateProductRequest): ProductResponse {
         val product = Product(
-            id = createProductRequest.id!!,
-            name = createProductRequest.name!!,
-            price = createProductRequest.price!!,
-            quantity = createProductRequest.quantity!!,
+            id = createProductRequest.id,
+            name = createProductRequest.name,
+            price = createProductRequest.price,
+            quantity = createProductRequest.quantity,
             createdAt = Date(),
             updatedAt = null
         )
@@ -69,8 +69,9 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
         if (product != null) {
             product.apply {
                 name = updateProductRequest.name ?: ""
-                price = updateProductRequest.price ?: 0
-                quantity = updateProductRequest.quantity ?: 0
+                price = updateProductRequest.price
+                quantity = updateProductRequest.quantity
+                updatedAt = Date()
             }
             logger.info("product updated $product")
             productRepository.save(product)

@@ -39,6 +39,7 @@ Content-Type: application/json
 
 ###
 # Update data
+# valid request
 PUT http://localhost:8080/api/products/AB001
 Content-Type: application/json
 Accept: application/json
@@ -47,4 +48,17 @@ Accept: application/json
   "name": "Tahu Bacem Enak Sekali",
   "price": 2000,
   "quantity": 10
+}
+
+###
+# Update Product
+# Invalid request
+PUT http://localhost:8080/api/products/AB001
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Tahu Bacem Enak Sekali",
+  "price": 2000,
+  "quantity": -10
 }
