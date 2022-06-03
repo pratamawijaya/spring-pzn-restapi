@@ -13,15 +13,14 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
 
     override fun create(createProductRequest: CreateProductRequest): ProductResponse {
         val product = Product(
-            id = createProductRequest.id,
-            name = createProductRequest.name,
-            price = createProductRequest.price,
-            quantity = createProductRequest.quantity,
+            id = createProductRequest.id!!,
+            name = createProductRequest.name!!,
+            price = createProductRequest.price!!,
+            quantity = createProductRequest.quantity!!,
             createdAt = Date(),
             updatedAt = null
         )
         productRepository.save(product)
-
         return ProductResponse(
             id = product.id,
             name = product.name,

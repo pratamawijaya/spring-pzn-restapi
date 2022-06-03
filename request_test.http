@@ -1,0 +1,25 @@
+## Valid request
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "AB001",
+  "name": "Tahu Bacem",
+  "price": 2000,
+  "quantity": 10
+}
+
+###
+
+## Invalid Request
+ POST http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "AB001",
+  "name": "Tahu Bacem",
+  "price": 2000,
+  "quantity": -10
+}
