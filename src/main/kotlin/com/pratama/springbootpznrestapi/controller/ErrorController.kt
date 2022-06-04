@@ -1,5 +1,6 @@
 package com.pratama.springbootpznrestapi.controller
 
+import com.pratama.springbootpznrestapi.error.UnAuthorizedException
 import com.pratama.springbootpznrestapi.model.WebResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -24,6 +25,16 @@ class ErrorController {
             code = 400,
             status = "Bad Request",
             data = "${data[0].field} ${data[0].defaultMessage}"
+        )
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnAuthorizedException::class)
+    fun unAuthorizedHandler(): WebResponse<String> {
+        return WebResponse(
+            code = 401,
+            status = "Failed",
+            data = "UnAuthorized Please Use X-Api-Key"
         )
     }
 }

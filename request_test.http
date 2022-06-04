@@ -28,6 +28,7 @@ Accept: application/json
 
 # get all products
 GET http://localhost:8080/api/products?page=0&size=10
+X-Api-Key: SECRET
 Content-Type: application/json
 ###
 
