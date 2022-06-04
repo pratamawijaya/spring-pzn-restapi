@@ -74,8 +74,7 @@ class ProductServiceImpl(val productRepository: ProductRepository) : ProductServ
 
     override fun delete(id: String) {
         val product = findProductByIdOrThrow(id)
-
-        productRepository.deleteById(id)
+        productRepository.deleteById(product.id)
     }
 
     private fun mapProductToProductResponse(product: Product): ProductResponse {
