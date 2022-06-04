@@ -4,28 +4,36 @@ import com.pratama.springbootpznrestapi.entity.Product
 import com.pratama.springbootpznrestapi.error.ProductNotFoundException
 import com.pratama.springbootpznrestapi.model.ProductResponse
 import com.pratama.springbootpznrestapi.model.request.CreateProductRequest
+import com.pratama.springbootpznrestapi.model.request.ListProductRequest
 import com.pratama.springbootpznrestapi.model.request.UpdateProductRequest
 import com.pratama.springbootpznrestapi.repository.ProductRepository
 import com.pratama.springbootpznrestapi.service.ProductService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
+import kotlin.collections.HashMap
+import kotlin.math.log
 
 @Service
 class ProductServiceImpl(val productRepository: ProductRepository) : ProductService {
     val logger: Logger = LoggerFactory.getLogger(ProductServiceImpl::class.java)
 
-    override fun get(): List<ProductResponse> {
-        val products = productRepository.findAll()
-        val listProductResponse = mutableListOf<ProductResponse>()
-        logger.info("list product : ${products.size}")
-        products.map {
-            listProductResponse.add(mapProductToProductResponse(it))
-        }
-        logger.info("list product after mapping : ${listProductResponse.size}")
-        return listProductResponse
+    override fun list(productRequest: ListProductRequest): HashMap<String, Any> {
+        val pageable = PageRequest.of(productRequest.page, productRequest.size)
+        val page = productRepository.findAll(pageable)
+        val products: List<Product> = page.content
+
+        val response = HashMap<String, Any>()
+        response["items"] = products
+        response["currentPage"] = page.number
+        response["totalItems"] = page.totalElements
+        response["totalPages"] = page.totalPages
+
+        return response
     }
 
     override fun create(createProductRequest: CreateProductRequest): ProductResponse {
