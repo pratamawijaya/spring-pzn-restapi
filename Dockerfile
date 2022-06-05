@@ -5,6 +5,6 @@ RUN  apk update \
   && apk add --update openjdk11 tzdata curl unzip bash \
   && rm -rf /var/cache/apk/*
 
-COPY build/libs/springboot-pzn-restapi-0.0.1-SNAPSHOT.jar /app/application.jar
+COPY build/libs/springboot-pzn-restapi-0.0.1.jar /app/application.jar
 
 CMD ["java", "-jar", "app/application.jar"]
