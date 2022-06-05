@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: ${DATABASE_USERNAME:kotlin}
+    password: ${DATABASE_PASSWORD:kotlin}
+    url: jdbc:postgresql://${DATABASE_IP:localhost}:5432/restful-api
+  jpa:
+    hibernate:
+      ddl-auto: update

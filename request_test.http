@@ -3,11 +3,12 @@
 POST http://localhost:8080/api/products
 Content-Type: application/json
 Accept: application/json
+X-Api-Key: SECRET
 
 {
-  "id": "AB012",
+  "id": "AB001",
   "name": "Tahu Sumedang",
-  "price": 2000,
+  "price": 3000,
   "quantity": 10
 }
 ###

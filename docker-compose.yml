@@ -6,16 +6,23 @@ services:
     image: kotlin-restful-api:0.0.2
     ports:
       - "8080:8080"
+    networks: 
+      - app-db-network
     environment:
       DATABASE_USERNAME: kotlin
       DATABASE_PASSWORD: kotlin
-      DATABASE_URL: jdbc:postgresql://kotlin-restful-api-postgres:5432/restful-api
-  kotlin-restful-api-postgres:
-    container_name: "kotlin-restful-api-postgres"
+      DATABASE_IP: kotlin-restful-api-db
+  db:
+    container_name: "kotlin-restful-api-db"
     image: postgres:12-alpine
     ports:
       - "5432:5432"
+    networks: 
+      - app-db-network
     environment:
       POSTGRES_PASSWORD: kotlin
       POSTGRES_USER: kotlin
       POSTGRES_DB: restful-api
+
+networks:
+  app-db-network:
